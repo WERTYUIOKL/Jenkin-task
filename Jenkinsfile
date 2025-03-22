@@ -1,51 +1,74 @@
 pipeline {
     agent any
-    
-    environment {
-        DIRECTORY_PATH = 'https://github.com/WERTYUIOKL/Jenkin-task/new/main' 
-        TESTING_ENVIRONMENT = 'task'
-        PRODUCTION_ENVIRONMENT = 'akshit' 
-    }
-    
+
     stages {
+        // Stage 1: Build (Simulated)
         stage('Build') {
             steps {
-                echo "Fetch the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
-                echo "Compile the code and generate any necessary artifacts"
+                echo "Building code..."
             }
         }
-        
-        stage('Test') {
+
+        // Stage 2:Tests (Simulated)
+        stage('Tests') {
             steps {
-                echo "Running Unit tests"
-                echo "Running Integration tests"
+                echo "Running tests..."
+            }
+            post {
+                always {
+                    emailext (
+                        subject: "Test Results - ${currentBuild.currentResult}",
+                        body: "tests completed! Status: ${currentBuild.currentResult}",
+                        to: "akshit4757.be23@chitkara.edu.in", 
+                        replyTo: "akshit4757.be23@chitkara.edu.in"
+                    )
+                }
             }
         }
-        
-        stage('Code Quality Check') {
+
+        // Stage 3: Code Analysis (Simulated)
+        stage('Code Analysis') {
             steps {
-                echo "Check the quality of the code"
+                echo "Checking code quality..."
             }
         }
-        
-        stage('Deploy') {
+
+        // Stage 4: Security Scan (Simulated)
+        stage('Security Scan') {
             steps {
-                echo "Deploy the application to the testing environment specified by the environment variable: ${env.TESTING_ENVIRONMENT}"
+                echo "Scanning for vulnerabilities..."
+            }
+            post {
+                always {
+                    emailext (
+                        subject: "Security Scan - ${currentBuild.currentResult}",
+                        body: "Security scan completed! Status: ${currentBuild.currentResult}",
+                        to: "akshit4757.be23@chitkara.edu.in" 
+                    )
+                }
             }
         }
-        
-        stage('Approval') {
+
+        // Stage 5: Deploy to Staging (Simulated)
+        stage('Deploy to Staging') {
             steps {
-                echo "Waiting for manual approval..."
-                sleep(time: 10, unit: 'SECONDS') // Simulate manual approval with a 10-second pause
-                echo "Approval received. Proceeding to production deployment."
+                echo "Deploying to staging..."
             }
         }
-        
+
+        // Stage 6: Integration Tests (Simulated)
+        stage('Integration Tests') {
+            steps {
+                echo "Running integration tests..."
+            }
+        }
+
+        // Stage 7: Deploy to Production (Simulated)
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment: ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploying to production..."
             }
         }
     }
+
 }
