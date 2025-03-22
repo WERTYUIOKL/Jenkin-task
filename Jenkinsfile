@@ -19,8 +19,8 @@ pipeline {
                     emailext (
                         subject: "Test Results - ${currentBuild.currentResult}",
                         body: "tests completed! Status: ${currentBuild.currentResult}",
-                        to: "akshit4757.be23@chitkara.edu.in", 
-                        replyTo: "akshit4757.be23@chitkara.edu.in"
+                        to: "akshitatri08@gmail.com", 
+                        replyTo: "akshitatri08@gmail.com"
                     )
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
                     emailext (
                         subject: "Security Scan - ${currentBuild.currentResult}",
                         body: "Security scan completed! Status: ${currentBuild.currentResult}",
-                        to: "akshit4757.be23@chitkara.edu.in" 
+                        to: "akshitatri08@gmail.com" 
                     )
                 }
             }
