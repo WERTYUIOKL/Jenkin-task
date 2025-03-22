@@ -2,73 +2,67 @@ pipeline {
     agent any
 
     stages {
-        // Stage 1: Build (Simulated)
         stage('Build') {
             steps {
-                echo "Building code..."
-            }
-        }
-
-        // Stage 2:Tests (Simulated)
-        stage('Tests') {
-            steps {
-                echo "Running tests..."
-            }
-            post {
-                always {
-                    emailext (
-                        subject: "Test Results - ${currentBuild.currentResult}",
-                        body: "tests completed! Status: ${currentBuild.currentResult}",
-                        to: "akshitatri08@gmail.com", 
-                        replyTo: "akshitatri08@gmail.com"
-                    )
+                script {
+                    echo 'Building the application...'
                 }
             }
         }
-
-        // Stage 3: Code Analysis (Simulated)
+        stage('Unit and Integration Tests') {
+            steps {
+                script {
+                    echo 'Running unit and integration tests...'
+                }
+            }
+        }
         stage('Code Analysis') {
             steps {
-                echo "Checking code quality..."
-            }
-        }
-
-        // Stage 4: Security Scan (Simulated)
-        stage('Security Scan') {
-            steps {
-                echo "Scanning for vulnerabilities..."
-            }
-            post {
-                always {
-                    emailext (
-                        subject: "Security Scan - ${currentBuild.currentResult}",
-                        body: "Security scan completed! Status: ${currentBuild.currentResult}",
-                        to: "akshitatri08@gmail.com" 
-                    )
+                script {
+                    echo 'Performing code analysis...'
                 }
             }
         }
-
-        // Stage 5: Deploy to Staging (Simulated)
+        stage('Security Scan') {
+            steps {
+                script {
+                    echo 'Running security scan...'
+                }
+            }
+        }
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying to staging..."
+                script {
+                    echo 'Deploying application to staging server...'
+                }
             }
         }
-
-        // Stage 6: Integration Tests (Simulated)
-        stage('Integration Tests') {
+        stage('Integration Tests on Staging') {
             steps {
-                echo "Running integration tests..."
+                script {
+                    echo 'Running integration tests on staging environment...'
+                }
             }
         }
-
-        // Stage 7: Deploy to Production (Simulated)
         stage('Deploy to Production') {
             steps {
-                echo "Deploying to production..."
+                script {
+                    echo 'Deploying application to production server...'
+                }
             }
         }
     }
 
+    post {
+        always {
+            script {
+                echo 'Sending email notification...'
+                mail (
+                    subject: "Pipeline Notification: ${JOB_NAME} - Build #${BUILD_NUMBER}",
+                    body: "The pipeline has completed. Check details at: ${BUILD_URL}",
+                    to: 'akshitatri08@gmail.com'
+                )
+            }
+        }
+    }
 }
