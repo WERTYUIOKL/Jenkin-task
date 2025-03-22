@@ -5,42 +5,42 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'Building the application...'
+                    echo 'Application started building...'
                 }
             }
         }
         stage('Unit and Integration Tests') {
             steps {
                 script {
-                    echo 'Running unit and integration tests...'
+                    echo 'Running tests...'
                 }
             }
         }
         stage('Code Analysis') {
             steps {
                 script {
-                    echo 'Performing code analysis...'
+                    echo 'code analysis...'
                 }
             }
         }
         stage('Security Scan') {
             steps {
                 script {
-                    echo 'Running security scan...'
+                    echo 'security scanning...'
                 }
             }
         }
         stage('Deploy to Staging') {
             steps {
                 script {
-                    echo 'Deploying application to staging server...'
+                    echo 'Deploying application...'
                 }
             }
         }
         stage('Integration Tests on Staging') {
             steps {
                 script {
-                    echo 'Running integration tests on staging environment...'
+                    echo 'Running integration tests...'
                 }
             }
         }
