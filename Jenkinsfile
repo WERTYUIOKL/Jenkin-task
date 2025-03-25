@@ -60,7 +60,7 @@ pipeline {
                 mail (
                     subject: "Pipeline Notification: ${JOB_NAME} - Build #${BUILD_NUMBER}",
                     body: "The pipeline has completed. Check details at: ${BUILD_URL}",
-                    to: 'ansh4763.be23@chitkara.edu.in'
+                    to: 'akshitatri08@gmail.com'
                 )
             }
         }
