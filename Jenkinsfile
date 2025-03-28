@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Application started building...'
-                    // Example: Using Maven or Gradle for building
+                    // Tool: Maven/Gradle
                     sh 'mvn clean package' // For Java projects
                     // sh './gradlew build' // For Gradle projects
                 }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    // Example: JUnit for Java, pytest for Python
+                    // Tool: JUnit/pytest
                     sh 'mvn test' // Java projects with JUnit
                     // sh 'pytest tests/' // Python projects
                 }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running code analysis...'
-                    // Example: SonarQube for code analysis
+                    // Tool: SonarQube
                     sh 'sonar-scanner -Dsonar.projectKey=my_project'
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running security scanning...'
-                    // Example: OWASP Dependency Check, Snyk
+                    // Tool: OWASP Dependency Check/Snyk
                     sh 'dependency-check --scan ./'
                     // sh 'snyk test' // If using Snyk
                 }
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying application to staging...'
-                    // Example: Using Docker and Kubernetes
+                    // Tool: Docker/Kubernetes
                     sh 'kubectl apply -f staging-deployment.yaml'
                 }
             }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running integration tests on staging...'
-                    // Example: Selenium for UI tests
+                    // Tool: Selenium/pytest
                     sh 'pytest integration_tests/'
                 }
             }
@@ -63,7 +63,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying application to production server...'
-                    // Example: Using Ansible, Docker, Kubernetes
+                    // Tool: Ansible/Docker/Kubernetes
                     sh 'kubectl apply -f production-deployment.yaml'
                 }
             }
@@ -74,6 +74,7 @@ pipeline {
         always {
             script {
                 echo 'Sending email notification...'
+                // Tool: Jenkins Mail Plugin
                 mail (
                     subject: "Pipeline Notification: ${JOB_NAME} - Build #${BUILD_NUMBER}",
                     body: "The pipeline has completed. Check details at: ${BUILD_URL}",
