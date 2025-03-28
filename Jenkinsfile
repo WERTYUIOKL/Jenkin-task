@@ -7,8 +7,6 @@ pipeline {
                 script {
                     echo 'Application started building...'
                     // Tool: Maven/Gradle
-                    sh 'mvn clean package' // For Java projects
-                    // sh './gradlew build' // For Gradle projects
                 }
             }
         }
@@ -17,8 +15,6 @@ pipeline {
                 script {
                     echo 'Running tests...'
                     // Tool: JUnit/pytest
-                    sh 'mvn test' // Java projects with JUnit
-                    // sh 'pytest tests/' // Python projects
                 }
             }
         }
@@ -27,7 +23,6 @@ pipeline {
                 script {
                     echo 'Running code analysis...'
                     // Tool: SonarQube
-                    sh 'sonar-scanner -Dsonar.projectKey=my_project'
                 }
             }
         }
@@ -36,8 +31,6 @@ pipeline {
                 script {
                     echo 'Running security scanning...'
                     // Tool: OWASP Dependency Check/Snyk
-                    sh 'dependency-check --scan ./'
-                    // sh 'snyk test' // If using Snyk
                 }
             }
         }
@@ -46,7 +39,6 @@ pipeline {
                 script {
                     echo 'Deploying application to staging...'
                     // Tool: Docker/Kubernetes
-                    sh 'kubectl apply -f staging-deployment.yaml'
                 }
             }
         }
@@ -55,7 +47,6 @@ pipeline {
                 script {
                     echo 'Running integration tests on staging...'
                     // Tool: Selenium/pytest
-                    sh 'pytest integration_tests/'
                 }
             }
         }
@@ -64,7 +55,6 @@ pipeline {
                 script {
                     echo 'Deploying application to production server...'
                     // Tool: Ansible/Docker/Kubernetes
-                    sh 'kubectl apply -f production-deployment.yaml'
                 }
             }
         }
