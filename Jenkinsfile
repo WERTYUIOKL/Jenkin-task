@@ -6,6 +6,9 @@ pipeline {
             steps {
                 script {
                     echo 'Application started building...'
+                    // Example: Using Maven or Gradle for building
+                    sh 'mvn clean package' // For Java projects
+                    // sh './gradlew build' // For Gradle projects
                 }
             }
         }
@@ -13,34 +16,46 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
+                    // Example: JUnit for Java, pytest for Python
+                    sh 'mvn test' // Java projects with JUnit
+                    // sh 'pytest tests/' // Python projects
                 }
             }
         }
         stage('Code Analysis') {
             steps {
                 script {
-                    echo 'code analysis...'
+                    echo 'Running code analysis...'
+                    // Example: SonarQube for code analysis
+                    sh 'sonar-scanner -Dsonar.projectKey=my_project'
                 }
             }
         }
         stage('Security Scan') {
             steps {
                 script {
-                    echo 'security scanning...'
+                    echo 'Running security scanning...'
+                    // Example: OWASP Dependency Check, Snyk
+                    sh 'dependency-check --scan ./'
+                    // sh 'snyk test' // If using Snyk
                 }
             }
         }
         stage('Deploy to Staging') {
             steps {
                 script {
-                    echo 'Deploying application...'
+                    echo 'Deploying application to staging...'
+                    // Example: Using Docker and Kubernetes
+                    sh 'kubectl apply -f staging-deployment.yaml'
                 }
             }
         }
         stage('Integration Tests on Staging') {
             steps {
                 script {
-                    echo 'Running integration tests...'
+                    echo 'Running integration tests on staging...'
+                    // Example: Selenium for UI tests
+                    sh 'pytest integration_tests/'
                 }
             }
         }
@@ -48,6 +63,8 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying application to production server...'
+                    // Example: Using Ansible, Docker, Kubernetes
+                    sh 'kubectl apply -f production-deployment.yaml'
                 }
             }
         }
